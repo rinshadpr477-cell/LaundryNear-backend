@@ -3,27 +3,19 @@ const shops = require("../model/shopModel")
 // Add Shop
 
 exports.addShopController = async(req,res)=>{
-
     console.log("inside addShopController")
-
     const {shopName,ownerName, email,phone, address, area,services } = req.body
 
     try{
-
         const existingShop = await shops.findOne({email})
-
         if(existingShop){
             res.status(406).json("Shop already exists")
         }
         else{
-
-            const newShop = new shops({ shopName, ownerName, email, phone,address,  area,  services })
-
+            const newShop = new shops({ shopName, ownerName, email, phone,address,  area,  services,status:"pending" })
             await newShop.save()
-
             res.status(200).json(newShop)
         }
-
     }catch(err){
         res.status(500).json(err)
     }

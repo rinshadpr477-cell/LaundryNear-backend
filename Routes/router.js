@@ -39,6 +39,7 @@ router.get("/admin/users", jwtMiddleware, adminController.getAllUsersController)
 router.get("/admin/orders", jwtMiddleware, adminController.getAllOrdersController)
 router.get("/admin/dashboard-count", jwtMiddleware, adminController.getDashboardCountController)
 router.put("/admin/shop/approve/:id",jwtMiddleware,shopController.approveShopController)
+router.get("/admin/shops",jwtMiddleware,adminController.getAllAdminShopsController)
 
 
 // -----------------delivery routes--------

@@ -54,3 +54,14 @@ exports.getDashboardCountController = async (req, res) => {
         res.status(500).json(err)
     }
 }
+
+//Get All Shops 
+
+exports.getAllAdminShopsController = async(req,res)=>{
+    try{
+        const allShops = await shops.find().sort({createdAt:-1})
+        res.status(200).json(allShops)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}

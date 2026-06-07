@@ -34,13 +34,11 @@ exports.addShopController = async(req,res)=>{
 // Get All Shops
 
 exports.getAllShopsController = async(req,res)=>{
-
     try{
-
-        const allShops = await shops.find()
-
+        const allShops = await shops.find({
+            status:"approved"
+        })
         res.status(200).json(allShops)
-
     }catch(err){
         res.status(500).json(err)
     }

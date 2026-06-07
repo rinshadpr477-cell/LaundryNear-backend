@@ -77,15 +77,21 @@ exports.getSingleOrderController = async (req, res) => {
 exports.getShopOrdersController = async (req, res) => {
     console.log("inside getShopOrdersController");
 
-    const shopId = req.payload
-    console.log(shopId);
+    const shopId = req.payload;
+
+    console.log("JWT Payload:", shopId);
 
     try {
-        const shopOrders = await orders.find({ shopId }).sort({ _id: -1 })
-        res.status(200).json(shopOrders)
-    }
-    catch (err) {
-        res.status(500).json(err)
+
+        const shopOrders = await orders.find({ shopId });
+
+        console.log("Orders Found:", shopOrders);
+
+        res.status(200).json(shopOrders);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
     }
 }
 

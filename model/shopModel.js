@@ -36,6 +36,12 @@ const shopSchema = new mongoose.Schema({
     services:{
         type:Array,
         default:[]
+    },
+
+    status:{
+        type:String,
+        default:"pending",
+        enum:["pending","approved","rejected"]
     }
 
 },{

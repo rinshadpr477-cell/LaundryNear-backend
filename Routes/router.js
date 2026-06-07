@@ -22,6 +22,7 @@ router.post("/add-shop",shopController.addShopController)
 router.get("/all-shops",shopController.getAllShopsController)
 router.get("/view-shop/:id",shopController.getSingleShopController)
 
+
 // -------orders------
 
 router.post('/place-order', jwtMiddleware, orderController.placeOrderController)
@@ -37,6 +38,7 @@ router.put("/order/cancel/:id",jwtMiddleware,orderController.cancelOrderControll
 router.get("/admin/users", jwtMiddleware, adminController.getAllUsersController)
 router.get("/admin/orders", jwtMiddleware, adminController.getAllOrdersController)
 router.get("/admin/dashboard-count", jwtMiddleware, adminController.getDashboardCountController)
+router.put("/admin/shop/approve/:id",jwtMiddleware,shopController.approveShopController)
 
 
 // -----------------delivery routes--------

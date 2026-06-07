@@ -64,3 +64,21 @@ exports.getSingleShopController = async(req,res)=>{
         res.status(500).json(err)
     }
 }
+
+// Approve Shops
+
+exports.approveShopController = async(req,res)=>{
+    console.log("inside approveShopController");
+    
+    const {id} = req.params
+    try{
+        const updatedShop = await shops.findByIdAndUpdate(
+            id,
+            {status:"approved"},
+            {new:true}
+        )
+        res.status(200).json(updatedShop)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}

@@ -1,4 +1,6 @@
 const orders = require('../model/orderModel')
+const users = require('../model/userModel')
+const shops = require('../model/shopModel')
 
 // place order
 
@@ -75,23 +77,35 @@ exports.getSingleOrderController = async (req, res) => {
 // get shop orders
 
 exports.getShopOrdersController = async (req, res) => {
-    console.log("inside getShopOrdersController");
+    console.log("inside getShopOrdersController")
 
-    const shopId = req.payload;
-
-    console.log("JWT Payload:", shopId);
+    const userId = req.payload
 
     try {
 
-        const shopOrders = await orders.find({ shopId });
+        const user = await users.findById(userId)
 
-        console.log("Orders Found:", shopOrders);
+        if (!user) {
+            return res.status(404).json("User not found")
+        }
 
-        res.status(200).json(shopOrders);
+        const shop = await shops.findOne({
+            email: user.email
+        })
+
+        if (!shop) {
+            return res.status(404).json("Shop not found")
+        }
+
+        const shopOrders = await orders.find({
+            shopId: shop._id.toString()
+        }).sort({ _id: -1 })
+
+        res.status(200).json(shopOrders)
 
     } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        console.log(err)
+        res.status(500).json(err)
     }
 }
 
